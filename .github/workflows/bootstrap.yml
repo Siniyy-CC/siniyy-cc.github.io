@@ -19,11 +19,17 @@ jobs:
       - name: Import SetsuLand source
         shell: bash
         run: |
+          if [[ -f setsuland-source.zip.b64 ]]; then
+            base64 --decode setsuland-source.zip.b64 > setsuland-source.zip
+            rm setsuland-source.zip.b64
+          fi
+
           if [[ ! -f setsuland-source.zip ]]; then
             echo "Waiting for source archive."
             exit 0
           fi
 
+          echo "531d2a4160f4d2d8ea491f9aaa5f9adc868d0e3f7912a9f2d30581722627fcdb  setsuland-source.zip" | sha256sum --check
           find . -mindepth 1 -maxdepth 1 ! -name .git ! -name setsuland-source.zip -exec rm -rf {} +
           unzip -q setsuland-source.zip -d .
           rm setsuland-source.zip
