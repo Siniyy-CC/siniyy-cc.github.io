@@ -194,6 +194,7 @@ input:focus-visible {
 }
 
 .post-header .text-title {
+  font-family: $main-font;
   font-size: clamp(1.75rem, 7vw, 2.65rem);
   letter-spacing: -.045em;
   margin: 0 0 .7rem;
