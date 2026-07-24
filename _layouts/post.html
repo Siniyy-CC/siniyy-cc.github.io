@@ -4,40 +4,31 @@ layout: default
 
 <article class="post h-entry">
   <header class="post-header">
-    <p class="post-kicker">SetsuLand · {{ site.author.name }}</p>
     <h1 class="text-title p-name">{{ page.title }}</h1>
-    <div class="post-meta">
-      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}">
-        {{ page.date | date: "%Y年%-m月%-d日" }}
-      </time>
-      {% if page.author %}<span>· {{ page.author }}</span>{% endif %}
-    </div>
+    <p class="post-byline">{{ page.author | default: site.author.name }}</p>
+
+    <dl class="post-facts" aria-label="文章資訊">
+      <div>
+        <dt>日期</dt>
+        <dd>
+          <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}">
+            {{ page.date | date: "%Y年%-m月%-d日" }}
+          </time>
+        </dd>
+      </div>
+      <div>
+        <dt>標籤</dt>
+        <dd>
+          <a href="{{ '/tags/' | relative_url }}#{{ site.pairing | slugify }}">{{ site.pairing }}</a>{% for tag in page.tags %}{% unless tag == site.pairing %}<span aria-hidden="true">・</span><a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a>{% endunless %}{% endfor %}
+        </dd>
+      </div>
+      <div>
+        <dt>分級</dt>
+        <dd>{{ page.rating | default: "未標示" }}{% if page.warnings %}<span aria-hidden="true">・</span>{{ page.warnings }}{% endif %}</dd>
+      </div>
+    </dl>
+
     {% if page.description %}<p class="post-description p-summary">{{ page.description }}</p>{% endif %}
-    <aside class="reading-guide" aria-label="閱讀提示">
-      <dl>
-        <div>
-          <dt>配對</dt>
-          <dd>【{{ site.pairing }}】</dd>
-        </div>
-        <div>
-          <dt>分級</dt>
-          <dd>{{ page.rating | default: "未標示" }}</dd>
-        </div>
-        {% if page.warnings %}
-        <div>
-          <dt>內容提示</dt>
-          <dd>{{ page.warnings }}</dd>
-        </div>
-        {% endif %}
-      </dl>
-    </aside>
-    {% if page.tags.size > 0 %}
-    <ul class="tag-list" aria-label="文章標籤">
-      {% for tag in page.tags %}
-      <li><a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a></li>
-      {% endfor %}
-    </ul>
-    {% endif %}
   </header>
 
   <div class="post-content e-content">
