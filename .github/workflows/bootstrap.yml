@@ -1,0 +1,35 @@
+name: Bootstrap SetsuLand
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  import-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Import SetsuLand source
+        shell: bash
+        run: |
+          if [[ ! -f setsuland-source.zip ]]; then
+            echo "Waiting for source archive."
+            exit 0
+          fi
+
+          find . -mindepth 1 -maxdepth 1 ! -name .git ! -name setsuland-source.zip -exec rm -rf {} +
+          unzip -q setsuland-source.zip -d .
+          rm setsuland-source.zip
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Publish SetsuLand"
+          git push
