@@ -1,0 +1,24 @@
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<aside class="sidebar" id="sidebar" aria-hidden="true">
+  <div class="sidebar-item sidebar-intro">
+    <p>{{ site.description }}</p>
+  </div>
+
+  <nav class="sidebar-nav" aria-label="網站導覽">
+    <a class="sidebar-nav-item{% if page.url == '/' %} active{% endif %}" href="{{ '/' | relative_url }}">首頁</a>
+    <a class="sidebar-nav-item{% if page.url == '/archive/' %} active{% endif %}" href="{{ '/archive/' | relative_url }}">歸檔</a>
+    <a class="sidebar-nav-item{% if page.url == '/tags/' %} active{% endif %}" href="{{ '/tags/' | relative_url }}">標籤</a>
+    <a class="sidebar-nav-item{% if page.url == '/search/' %} active{% endif %}" href="{{ '/search/' | relative_url }}">搜尋</a>
+    <a class="sidebar-nav-item{% if page.url == '/about/' %} active{% endif %}" href="{{ '/about/' | relative_url }}">關於</a>
+    <a class="sidebar-nav-item" href="{{ '/atom.xml' | relative_url }}">RSS</a>
+    {% if site.social.github != "" %}
+    <a class="sidebar-nav-item" href="{{ site.social.github }}" rel="me">GitHub</a>
+    {% endif %}
+  </nav>
+
+  <div class="sidebar-item sidebar-footer">
+    <p>© {{ site.time | date: '%Y' }} {{ site.author.name }}</p>
+    <p>基於 <a href="https://minicomp.github.io/ed/">Ed.</a> 構建。</p>
+  </div>
+</aside>

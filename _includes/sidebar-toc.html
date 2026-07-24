@@ -1,0 +1,20 @@
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<aside class="sidebar" id="sidebar" aria-hidden="true">
+  <div class="sidebar-item">
+    <p>{{ page.title }}</p>
+  </div>
+
+  <nav class="sidebar-nav" aria-label="文章目錄">
+    <a class="sidebar-nav-item" href="{{ '/' | relative_url }}">首頁</a>
+    <a class="sidebar-nav-item" href="#">回到頂部</a>
+    {% for node in page.toc %}
+    <a class="sidebar-nav-item sidebar-nav-item-toc" href="#{{ node | slugify }}">{{ node }}</a>
+    {% endfor %}
+  </nav>
+
+  <div class="sidebar-item sidebar-footer">
+    <p>© {{ site.time | date: '%Y' }} {{ site.author.name }}</p>
+    <p>基於 <a href="https://minicomp.github.io/ed/">Ed.</a> 構建。</p>
+  </div>
+</aside>

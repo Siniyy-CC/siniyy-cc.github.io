@@ -1,0 +1,61 @@
+---
+layout: default
+---
+
+<article class="post h-entry">
+  <header class="post-header">
+    <p class="post-kicker">SetsuLand · {{ site.author.name }}</p>
+    <h1 class="text-title p-name">{{ page.title }}</h1>
+    <div class="post-meta">
+      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}">
+        {{ page.date | date: "%Y年%-m月%-d日" }}
+      </time>
+      {% if page.author %}<span>· {{ page.author }}</span>{% endif %}
+    </div>
+    {% if page.description %}<p class="post-description p-summary">{{ page.description }}</p>{% endif %}
+    <aside class="reading-guide" aria-label="閱讀提示">
+      <dl>
+        <div>
+          <dt>配對</dt>
+          <dd>【{{ site.pairing }}】</dd>
+        </div>
+        <div>
+          <dt>分級</dt>
+          <dd>{{ page.rating | default: "未標示" }}</dd>
+        </div>
+        {% if page.warnings %}
+        <div>
+          <dt>內容提示</dt>
+          <dd>{{ page.warnings }}</dd>
+        </div>
+        {% endif %}
+      </dl>
+    </aside>
+    {% if page.tags.size > 0 %}
+    <ul class="tag-list" aria-label="文章標籤">
+      {% for tag in page.tags %}
+      <li><a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </header>
+
+  <div class="post-content e-content">
+    {{ content }}
+  </div>
+
+  <nav class="post-navigation" aria-label="相鄰文章">
+    <div>
+      {% if page.previous %}
+      <span>上一篇</span>
+      <a href="{{ page.previous.url | relative_url }}">{{ page.previous.title }}</a>
+      {% endif %}
+    </div>
+    <div>
+      {% if page.next %}
+      <span>下一篇</span>
+      <a href="{{ page.next.url | relative_url }}">{{ page.next.title }}</a>
+      {% endif %}
+    </div>
+  </nav>
+</article>

@@ -1,0 +1,52 @@
+---
+layout: default
+title: 首頁
+---
+
+<section class="introduction" aria-labelledby="welcome-title">
+  <p class="eyebrow">SetsuLand · {{ site.author.name }}</p>
+  <h1 id="welcome-title">{{ site.tagline }}</h1>
+  <div class="site-notice" role="note" aria-label="閱讀提示">
+    <span>閱讀提示</span>
+    <p>{{ site.description }}</p>
+  </div>
+</section>
+
+<hr>
+
+<section aria-labelledby="latest-posts">
+  <div class="section-heading">
+    <h2 id="latest-posts">近期文章</h2>
+    <a href="{{ '/archive/' | relative_url }}">查看全部</a>
+  </div>
+
+  {% if site.posts.size > 0 %}
+  <ol class="post-list">
+    {% for post in site.posts limit: 8 %}
+    <li>
+      <article>
+        <time datetime="{{ post.date | date_to_xmlschema }}">
+          {{ post.date | date: "%Y年%-m月%-d日" }}
+        </time>
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        <p class="post-list-meta">【{{ site.pairing }}】 · 分級：{{ post.rating | default: "未標示" }}</p>
+        {% if post.description %}
+        <p>{{ post.description }}</p>
+        {% else %}
+        <p>{{ post.excerpt | strip_html | normalize_whitespace | truncate: 110 }}</p>
+        {% endif %}
+        {% if post.tags.size > 0 %}
+        <ul class="tag-list" aria-label="文章標籤">
+          {% for tag in post.tags %}
+          <li><a href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </article>
+    </li>
+    {% endfor %}
+  </ol>
+  {% else %}
+  <p>第一篇文章正在路上。</p>
+  {% endif %}
+</section>

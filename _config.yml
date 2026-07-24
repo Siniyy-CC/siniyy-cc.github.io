@@ -1,0 +1,65 @@
+# Site identity
+title:               "SetsuLand"
+tagline:             "Un jour je serai de retour près de toi"
+description:         "全部文章配對都為【桃絨】，請閱讀時注意標籤和分級提示。"
+lang:                zh-Hant
+og_locale:           zh_TW
+timezone:            Asia/Shanghai
+pairing:             "桃絨"
+
+# Publishing
+# For https://username.github.io use baseurl: "".
+# For https://username.github.io/repository use baseurl: "/repository".
+url:                 "https://siniyy-cc.github.io"
+baseurl:             ""
+
+# About/contact
+author:
+  name:              "雪梨"
+  url:               ""
+  email:             ""
+
+social:
+  github:            "https://github.com/Siniyy-CC"
+
+# Leave empty for the custom colors in assets/css/style.scss.
+# Built-in options: red, orange, magenta, cyan, blue, brown.
+color-scheme:
+
+# Posts
+permalink:           /:year/:month/:day/:title/
+future:              false
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+# Markdown
+markdown: kramdown
+kramdown:
+  auto_ids:          true
+  footnote_nr:       1
+  entity_output:     as_char
+  footnote_backlink: "&#x21a9;&#xfe0e;"
+  toc_levels:        1..6
+  smart_quotes:      lsquo,rsquo,ldquo,rdquo
+  enable_coderay:    false
+
+# Files that should not appear in the generated site
+exclude:
+  - optional
+  - vendor
+  - ed..gemspec
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE.md
+  - assets/apple-touch-icon-precomposed.png
+  - assets/favicon.ico
+  - assets/open-graph-logo.png
+  - assets/screenshot-home.png
+  - backstop_data
+  - backstop.json
